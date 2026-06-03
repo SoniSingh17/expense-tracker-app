@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { handleError, handleSuccess } from '../utils';
+const API = process.env.REACT_APP_API_URL;
+
+
 
 function Home() {
   const navigate = useNavigate();
@@ -24,7 +27,7 @@ function Home() {
   const [product, setproduct] = useState([])
   const fetchProducts = async ()=>{
     try {
-      const url = "http://localhost:8080/products";
+      const url = `${API}/products`;
       const response = await fetch(url , { headers : {'authorization' : localStorage.getItem('token')}});
       const result = await response.json();
       // console.log(result);

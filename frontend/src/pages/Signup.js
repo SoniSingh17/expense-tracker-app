@@ -2,6 +2,9 @@ import React , { useState } from 'react'
 import { ToastContainer } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
 import { handleError, handleSuccess } from '../utils'
+const API = process.env.REACT_APP_API_URL;
+
+
 
 function Signup() {
     const  [SignupInfo, setSignupInfo] = useState({
@@ -27,7 +30,7 @@ function Signup() {
 
         }
         try {
-            const url = "http://localhost:8080/auth/sign-up"
+            const url = `${API}/auth/sign-up`;
             const response = await fetch(url , {
                 method : "POST",
                 headers : {   
