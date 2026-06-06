@@ -99,6 +99,7 @@ function Home() {
   const totalExpense = expense.reduce((sum, item) => {
     return sum + Number(item.amount);
   }, 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchExpenses();
   }, []);
