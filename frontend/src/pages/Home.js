@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { handleError, handleSuccess } from "../utils";
@@ -28,22 +28,23 @@ function Home() {
   };
   // const [product, setproduct] = useState([])
   const [expense, setexpense] = useState([]);
-  const fetchExpenses = async () => {
+  const fetchExpenses = useCallback(async () => {
     try {
       const url = `${API}/expenses`;
       const response = await fetch(url, {
         headers: { authorization: localStorage.getItem("token") },
       });
+
       if (response.status === 403) {
         return navigate("/login");
       }
+
       const result = await response.json();
-      // console.log(result);
       setexpense(result.data);
     } catch (err) {
       handleError(err);
     }
-  };
+  }, [navigate]);
   const addExpense = async () => {
     try {
       const response = await fetch(`${API}/expenses`, {
@@ -74,15 +75,12 @@ function Home() {
   };
   const deleteExpense = async (expenseId) => {
     try {
-      const response = await fetch(
-        `${API}/expenses/${expenseId}`,
-        {
-          method: "DELETE",
-          headers: {
-            authorization: localStorage.getItem("token"),
-          },
+      const response = await fetch(`${API}/expenses/${expenseId}`, {
+        method: "DELETE",
+        headers: {
+          authorization: localStorage.getItem("token"),
         },
-      );
+      });
 
       const result = await response.json();
 
@@ -99,9 +97,9 @@ function Home() {
   const totalExpense = expense.reduce((sum, item) => {
     return sum + Number(item.amount);
   }, 0);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchExpenses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="home-container">
@@ -126,7 +124,9 @@ function Home() {
           ₹{totalExpense}
         </h3>
       </div>
-      <button className="add-btn" onClick={() => setShowForm(true)}>+ Add Expense</button>
+      <button className="add-btn" onClick={() => setShowForm(true)}>
+        + Add Expense
+      </button>
 
       {showForm && (
         <AddExpenseModal
