@@ -46,7 +46,7 @@ function Login() {
                 localStorage.setItem('loggedInUser' ,name);
                 setTimeout(()=>{
                     navigate('/home')
-                } , 3000)
+                } , 500)
             }
             else if(error){
                 const details = error?.details[0].message;

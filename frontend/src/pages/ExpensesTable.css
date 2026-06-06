@@ -1,0 +1,51 @@
+.expense-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Each row */
+.expense-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9fafc;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  transition: 0.2s;
+}
+
+.expense-item:hover {
+  transform: scale(1.01);
+  background: #f1f5ff;
+}
+
+/* Text */
+.expense-description {
+  flex: 1;
+  font-weight: 500;
+}
+
+/* Amount */
+.expense-amount {
+  width: 100px;
+  text-align: right;
+  font-weight: bold;
+}
+
+/* Delete button */
+.delete-button {
+  margin-left: 15px;
+  background: red;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  opacity: 0.8;
+}

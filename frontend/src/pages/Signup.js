@@ -45,7 +45,7 @@ function Signup() {
                 handleSuccess(message);
                 setTimeout(()=>{
                     navigate('/login')
-                } , 3000)
+                } , 1000)
             }
             else if(error){
                 const details = error?.details[0].message;
