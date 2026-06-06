@@ -4,6 +4,8 @@ const connectDb = require("./models/db")
 const cors = require("cors");
 const Authrouter = require("./routes/authRouter");
 const productrouter = require("./routes/productRouter")
+const expenseRoute = require('./routes/expenseRoute');
+const ensureAuthenticated = require('./middlewares/Auth');
 
 require('dotenv').config();
 connectDb();
@@ -19,6 +21,7 @@ app.get('/ping' , (req , res)=>{
 
 app.use('/auth' , Authrouter)
 app.use('/products' , productrouter)
+app.use('/expenses' , ensureAuthenticated , expenseRoute)
 
 
 app.listen(PORT , ()=>{

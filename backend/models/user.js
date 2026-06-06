@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 
 const userModel_Schema = new mongoose.Schema({
@@ -13,7 +14,25 @@ const userModel_Schema = new mongoose.Schema({
     password : {
         type : String ,
         required : true
-    }
+    },
+    expenses : [
+        {
+            text : {
+                type : String,
+                required : true
+            },
+            amount : {
+                type : Number , 
+                required : true
+
+            },
+            createdAt : {
+                type : Date,
+                default : Date.now 
+            }
+        }
+    ]
+    
 })
 
 const userModel = mongoose.model("user" , userModel_Schema);
